@@ -4,38 +4,35 @@
 
 class pricelist{
 	
-	//выводит таблицу pricelistgroup
+	//GROUP_HTML_TABLE()
+	//выводит html таблицу pricelistgroup
 	function group_html_table(){
-	
+	$UserAccess = "quest";
+	$QueryText = "SELECT plg_name FROM pricelistgroup";
 	$database = new database;
-	$data = $database->connect_with_access("quest");
-	$query = $data->query("SELECT plg_id, plg_name FROM pricelistgroup");
-	
-	$table = "<table class=\"table\"><tr><th>№</th><th>Группа позиций</th></tr>";
+	$query = $database->query_with_access ($QueryText , $UserAccess);
+	//формирую html таблицу на вывод
 	$i=0;
-	
+	$table = "<table class=\"table\"><tr><th>№</th><th>Группа позиций</th></tr>";
 	while($group = $query->fetch_assoc()){
 		$i++;
 		$table .= "<tr><td>" . $i . "</td><td>" . $group['plg_name'] ."</td></tr>";
 	};
-	
 	$table .= "</table>";
-	
-	$database->free;
-	
+	//-----
 	return $table;
 	}
+
+
 	
+	//GROUP_ADD
 	//добавляет новую позицию в pricelistgroup
 	function group_add(){
-		
 	$name = htmlspecialchars($_POST['NewGroupName']);
-		
+	$UserAccess = "mechanic";
+	$QueryText = "INSERT INTO pricelistgroup (plg_name) VALUES ('" . $name . "')";
 	$database = new database;
-	$data = $database->connect_with_access("mechanic");
-	$text = "INSERT INTO pricelistgroup (plg_name) VALUES ('" . $name . "')";
-	$query = $data->query($text);
-	return $text;	
+	$query = $database->query_with_access ($QueryText , $UserAccess);
 	}
 	
 	

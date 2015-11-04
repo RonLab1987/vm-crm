@@ -1,7 +1,9 @@
 <?php
 
 class database{
-		
+	
+	//connect_with_access
+	//устанавливаю соединение, юзеры MySQL имеют разные права 	
 	function connect_with_access($UserAccess){
 	$SqlServer="localhost";
 	$Database="bike_service";
@@ -28,10 +30,23 @@ class database{
 	else{
 		return "connect error";
 	}
-		
 	}
+	
+	
+	
+	// query_with_access
+	// выполняю запрос с учетом прав юзера
+	function query_with_access ($Query , $UserAccess){
+	$database = new database;
+	$data = $database->connect_with_access($UserAccess);
+	$query = $data->query($Query);
+	return $query;
+	}
+
+
+
+
+
 } 
-
-
 
 ?>
