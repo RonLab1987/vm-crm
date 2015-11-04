@@ -1,4 +1,4 @@
-<?php include_once 'auth.php'; ?>
+<?php include_once 'pricelist_class.php'; ?>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>вход в систему</title>
+    <title>тест</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -34,24 +34,10 @@
 
     <div class="container">
 
-      <form class="form-signin" action="index.php" method="post">
-        <label for="login" class="sr-only">Логин</label>
-        <input type="text" id="login" name="login" class="form-control" placeholder="Логин" required autofocus>
-        <label for="inputPassword" class="sr-only">Пароль</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Пароль" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="AuthSubmit" value="TRUE">Войти</button>
-        
-        <?php
-        if($_POST['AuthSubmit']){
-          $auth_result = Auth();
-          echo $auth_result;
-        } 
-        else{
-          echo "авторизуйтесь";       
-        }; 
-        ?>
-        
-      </form>
+      <?php
+      $pricelist = new pricelist;
+      echo $pricelist->group_html_table();
+      ?>
 
     </div> <!-- /container -->
 
@@ -60,3 +46,4 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+

@@ -1,4 +1,7 @@
-<?php include_once 'auth.php'; ?>
+<?php include_once 'pricelist_class.php'; ?>
+<?php $pricelist = new pricelist; ?>
+
+ <?php  if($_POST['AddSubmit']){ $pricelist->group_add(); } ?>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -11,7 +14,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>вход в систему</title>
+    <title>тест: добавляем группу</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -31,32 +34,32 @@
   </head>
 
   <body>
-
+  
     <div class="container">
 
-      <form class="form-signin" action="index.php" method="post">
-        <label for="login" class="sr-only">Логин</label>
-        <input type="text" id="login" name="login" class="form-control" placeholder="Логин" required autofocus>
-        <label for="inputPassword" class="sr-only">Пароль</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Пароль" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="AuthSubmit" value="TRUE">Войти</button>
+      <?php
+      $pricelist = new pricelist;
+      echo $pricelist->group_html_table();
+      ?>
+
+    </div>
+    
+    <div class="container">
+       <form class="form-signin" action="test-pricelistgroup-add.php" method="post">
+        <label for="NewGroupName" class="sr-only">имя новой группы</label>
+        <input type="text" id="NewGroupName" name="NewGroupName" class="form-control" placeholder="имя новой группы" required autofocus>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="AddSubmit" value="TRUE">добавить</button>
         
-        <?php
-        if($_POST['AuthSubmit']){
-          $auth_result = Auth();
-          echo $auth_result;
-        } 
-        else{
-          echo "авторизуйтесь";       
-        }; 
-        ?>
+        
         
       </form>
-
-    </div> <!-- /container -->
+    </div>
+    
+     <!-- /container -->
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+
