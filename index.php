@@ -1,3 +1,5 @@
+<?php include_once 'auth.php'; ?>
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -32,12 +34,23 @@
 
     <div class="container">
 
-      <form class="form-signin" action="auth.php" method="post">
+      <form class="form-signin" action="index.php" method="post">
         <label for="login" class="sr-only">Логин</label>
         <input type="text" id="login" name="login" class="form-control" placeholder="Логин" required autofocus>
         <label for="inputPassword" class="sr-only">Пароль</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Пароль" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="AuthSubmit" value="TRUE">Войти</button>
+        
+        <?php
+        if($_POST['AuthSubmit']){
+          $auth_result = Auth();
+          echo $auth_result;
+        } 
+        else{
+          echo "авторизуйтесь";       
+        }; 
+        ?>
+        
       </form>
 
     </div> <!-- /container -->
