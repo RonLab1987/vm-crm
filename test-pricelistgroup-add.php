@@ -1,8 +1,9 @@
 <?php include_once 'pricelist_class.php'; ?>
-<?php $pricelist = new pricelist; ?>
-
- <?php  if($_POST['AddSubmit']){ $pricelist->group_add(); } ?>
-
+ <?php  if($_POST['AddSubmit']){
+    $pricelist = new Pricelist;
+    $pricelist->pricelistAdd();
+    } 
+ ?>
 <!DOCTYPE html>
 <html lang="ru">
   <head>

@@ -1,5 +1,11 @@
 <?php include_once 'pricelist_class.php'; ?>
 
+ <?php  if($_POST['AddSubmit']){
+    $pricelist = new pricelist;
+    $pricelist->pricelistAdd();
+    } 
+ ?>
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -36,8 +42,31 @@
 
       <?php
       $pricelist = new pricelist;
-      echo $pricelist->pricelist_html_table();
+      echo $pricelist->pricelistTable("table","bg-primary text-uppercase");
       ?>
+
+    </div> <!-- /container -->
+
+     <div class="container">
+      <div  > 
+       <p class="lead text-uppercase">добавить новую позицию<p>
+        
+       <form class="form" action="test-pricelist.php" method="post">
+         <input class="form-control" type="text" name="plgName" id="plgName" list="priselistgroupSelect" placeholder="выбери группу или добавь новую">
+            <datalist id="priselistgroupSelect">
+              <?php
+              echo $pricelist->pricelistgroupOptionList();
+              ?>
+            </datalist>
+         <input type="text" class="form-control" name="plName" id="plName" placeholder="имя позиции">
+         <input type="number" class="form-control" name="plPrice" id="plPrice" placeholder="цена">
+         <button class="btn btn-primary btn-block" type="submit" name="AddSubmit" value="TRUE">добавить</button>
+         
+         
+       </form>  
+         
+
+     
 
     </div> <!-- /container -->
 
