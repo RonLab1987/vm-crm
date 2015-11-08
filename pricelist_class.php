@@ -20,6 +20,7 @@ class pricelist{
 	
 	//формирую html таблицу на вывод
 	$html = "<table class=\" $tableClass \">";
+	if($plQuery->num_rows > 0){
 	while($plQueryResult = $plQuery->fetch_assoc()){
 			if( $group_id != $plQueryResult['plg_id'] ){
 				$html .= "<tr  class=\"$headGroupClass\"><td>" . $plQueryResult['plg_name'] . "</td><td></td></tr>";
@@ -27,6 +28,10 @@ class pricelist{
 			}
 			$html .= "<tr><td>" .$plQueryResult['pl_name'] ."</td><td>"  . $plQueryResult['pl_price'] . "</td></tr>";
 		};
+	}
+	else{
+		$html .= "<tr  class=\"$headGroupClass\"><td>Прайс лист пока пуст.</td></tr>";
+	}
 	$html .= "</table>";
 	
 	return $html;
@@ -67,7 +72,7 @@ class pricelist{
 		$checkList = "";
 		while($qResult = $query->fetch_assoc()){
 		
-		$checkList .= "<option value=\"" . $qResult['plg_name'] . "\"></option>";
+		$checkList .= "<option class=\"text-uppercase\" value=\"" . $qResult['plg_name'] . "\"></option>";
 		};
 		
 	}
@@ -87,33 +92,28 @@ class pricelist{
 	*
 	/*pricelistAdd() добавляет новую позицию в pricelist*/
 	function pricelistAdd(){
-		
-		echo "go<br>";
-		
-		$plg_name = htmlspecialchars($_POST['plgName']);
-		//$pl_price= htmlspecialchars($_POST['plg_price']);
-		
-		$pl_name = $_POST['plName'];
+		$plg_name = trim($_POST['plgName']);
+		$plg_name = strtoupper($plg_name);
+		$pl_name = trim($_POST['plName']);
+		$pl_name = strtolower($pl_name);
 		$pl_price= $_POST['plPrice'];
 		
-		echo $pl_name ." == ". $plg_name . " == ". $pl_price. "<br>";
 		
+		//echo $pl_name ." == ". $plg_name . " == ". $pl_price. "<br>";
+		
+		//echo "<p class=\"lead\">" . $plg_name ." == ". $pl_name . " == ". $pl_price. "<br>";
 		$pricelist = new pricelist;
 		$plg_id = $pricelist->pricelistgroupAdd($plg_name);
-		//$plg_id = 1;
-		
-		echo $pl_name ." == ". $plg_id . " == ". $pl_price. "<br>";
-		
+		//echo "<p class=\"lead\">  " . $plg_id . " == ". $plg_name. "<br>";
 		$database = new database;
 		$UserAccess = "mechanic";
-		
-		
 		$QueryText = "INSERT INTO `pricelist`(`pl_name`, `pl_plg_id`,`pl_price`) VALUES (\"$pl_name\",$plg_id,$pl_price)";
-		
-		echo $QueryText;
-		if($plg_id!= -1) {$query = $database->query_with_access($QueryText , $UserAccess);}
-		
-		echo "fin";
+		//echo $QueryText;
+		if($plg_id != -1) {
+			$query = $database->query_with_access($QueryText , $UserAccess);
+			if(!$query){echo "<br>что то пошло не так: " .$query->error . "<br>";};
+		}	
+		// echo "<br>fin";
 	}
 	
 	
@@ -123,45 +123,36 @@ class pricelist{
 	*
 	*добавляет новую позицию в pricelistgroup */
 	function pricelistgroupAdd($plg_name){
-	
+	//вернусь сюда, если новая группа
+	search_plg_id:
 	// верну plg_id
 	$plg_id = -1;
-	
-	// запрос групп из базы	
+	// поиск в существующих группах	
 	$database = new database;
 	$UserAccess = "quest";
-	$QueryText = "SELECT plg_id, plg_name FROM pricelistgroup";
+	$QueryText = "SELECT plg_id, plg_name FROM pricelistgroup WHERE plg_name=\"$plg_name\"";
 	$query = $database->query_with_access($QueryText , $UserAccess);
 	
-	// поиск в существующих группах
-	
-	while ($qResult = $query->fetch_assoc()){
-		if($qResult['plg_name'] == $plg_name){
-			$plg_id = $qResult['plg_id'];			
-		}
-	} 
-	
-	// если есть - возвращаю plg_id, иначе добавляю новую группу и рекурсивно вызываю функцию
-	if($plg_id == -1){ 
-	$UserAccess = "mechanic";
-	$QueryText = "INSERT INTO `pricelistgroup`(`plg_name`) VALUES (\"$plg_name\") ";
-	$database->query_with_access($QueryText , $UserAccess);
-	
-	while ($qResult = $query->fetch_assoc()){
-		if($qResult['plg_name'] == $plg_name){
-			$plg_id = $qResult['plg_id'];			
-		}
-	} 
-	
-	//$pricelist = new Pricelist;
-	//$pricelist->pricelistgroupAdd($plg_name);
-	}	
-		
-	
-	
+	if($query->num_rows > 0){
+		$qResult= $query->fetch_assoc();
+		$plg_id = $qResult['plg_id'];
+	}
+	else{
+		$UserAccess = "mechanic";
+		$QueryText = "INSERT INTO `pricelistgroup`(`plg_name`) VALUES (\"$plg_name\") ";
+		$database->query_with_access($QueryText , $UserAccess);
+		goto search_plg_id;
+	}
 	
 	return $plg_id;
 	}
+	
+	
+	
+	/*
+	*
+	*
+	*/
 	
 }
 

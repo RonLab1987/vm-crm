@@ -42,7 +42,7 @@
 
       <?php
       $pricelist = new pricelist;
-      echo $pricelist->pricelistTable("table","bg-primary text-uppercase");
+      echo $pricelist->pricelistTable("table text-lowercase","bg-primary text-uppercase");
       ?>
 
     </div> <!-- /container -->
@@ -52,14 +52,14 @@
        <p class="lead text-uppercase">добавить новую позицию<p>
         
        <form class="form" action="test-pricelist.php" method="post">
-         <input class="form-control" type="text" name="plgName" id="plgName" list="priselistgroupSelect" placeholder="выбери группу или добавь новую">
-            <datalist id="priselistgroupSelect">
+         <input class="form-control text-uppercase" type="text" name="plgName" id="plgName" list="priselistgroupSelect" placeholder="выбери группу или добавь новую">
+            <datalist id="priselistgroupSelect" >
               <?php
               echo $pricelist->pricelistgroupOptionList();
               ?>
             </datalist>
-         <input type="text" class="form-control" name="plName" id="plName" placeholder="имя позиции">
-         <input type="number" class="form-control" name="plPrice" id="plPrice" placeholder="цена">
+         <input class="form-control text-lowercase" type="text" name="plName" id="plName" placeholder="имя позиции">
+         <input class="form-control" type="number" name="plPrice" id="plPrice" placeholder="цена">
          <button class="btn btn-primary btn-block" type="submit" name="AddSubmit" value="TRUE">добавить</button>
          
          
