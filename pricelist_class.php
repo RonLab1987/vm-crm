@@ -93,9 +93,7 @@ class pricelist{
 	/*pricelistAdd() добавляет новую позицию в pricelist*/
 	function pricelistAdd(){
 		$plg_name = trim($_POST['plgName']);
-		$plg_name = strtoupper($plg_name);
 		$pl_name = trim($_POST['plName']);
-		$pl_name = strtolower($pl_name);
 		$pl_price= $_POST['plPrice'];
 		
 		
