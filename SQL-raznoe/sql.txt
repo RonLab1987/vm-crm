@@ -22,3 +22,32 @@ CREATE TABLE `pricelist` (
         FOREIGN KEY (`pl_plg_id`) REFERENCES `pricelistgroup`(`plg_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
         INDEX (`pl_name`)
 );
+
+
+
+/* 12.11.15
+ * update pricelist, pricelistgroup
+ *
+ *
+ */ 
+ 
+DROP TABLE `pricelist`, `pricelistgroup`;
+ 
+CREATE TABLE `pricelistgroup` (
+	`plg_id` INTEGER NOT NULL AUTO_INCREMENT,
+        `plg_name` CHAR(50) UNIQUE,
+        `plg_show_id` INTEGER DEFAULT 0,
+        PRIMARY KEY (`plg_id`),
+        INDEX (`plg_name`)
+);
+ 
+CREATE TABLE `pricelist` (
+	`pl_id` INTEGER NOT NULL AUTO_INCREMENT,
+        `pl_plg_id` INTEGER NOT NULL,
+        `pl_name` MEDIUMTEXT,
+	`pl_price` INTEGER,
+        PRIMARY KEY (`pl_id`),
+        FOREIGN KEY (`pl_plg_id`) REFERENCES `pricelistgroup`(`plg_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+/* ******************

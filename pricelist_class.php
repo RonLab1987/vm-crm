@@ -62,7 +62,7 @@ class pricelist{
 	
 	//pricelistgroupCheckListHTML
 	// выводит список групп для выбора при добавлении новой позиции в pricelist
-	function pricelistgroupOptionList(){
+	function pricelistGroupOptionList(){
 	$UserAccess = "quest";
 	$QueryText = "SELECT plg_id, plg_name FROM pricelistgroup";
 	$database = new database;
@@ -111,7 +111,7 @@ class pricelist{
 			$query = $database->query_with_access($QueryText , $UserAccess);
 			if(!$query){echo "<br>что то пошло не так: " .$query->error . "<br>";};
 		}	
-		// echo "<br>fin";
+		//echo "addDone";
 	}
 	
 	

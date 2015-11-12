@@ -1,12 +1,3 @@
-<!--
-<?php include_once 'pricelist_class.php'; ?>
-
- <?php /* if($_POST['AddSubmit']){
-    $pricelist = new pricelist;
-    $pricelist->pricelistAdd();
-    } */
- ?>-->
-
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -38,46 +29,31 @@
   </head>
 
   <body>
-
-    <div class="container" id="pricelistTable">
-
-      <!--?php
-      $pricelist = new pricelist;
-      echo $pricelist->pricelistTable("table text-lowercase","bg-primary text-uppercase");
-      ?-->
-
+   <div class="container">
+    <div  id="pricelistTable">
     </div> <!-- /container -->
 
-     <div class="container">
-       <button class="btn btn-primary btn-block" onclick="btnClick()" type="submit" id="AddSubmit" name="AddSubmit" value="TRUE">вывести таблицу</button>
-       
-      <!--div  > 
-       <p class="lead text-uppercase">добавить новую позицию<p>
-        
-       <!--form class="form" action="test-pricelist.php" method="post"-->
-       <!--form class="form"  method="post" id="pricelistFormAdd">  
+    <div  id="formContainer"> 
+       <p class="lead text-uppercase">добавить новую позицию</p>
+       <form class="form"  method="post" id="pricelistFormAdd" action="test-ajax-pricelistAdd.php">  
          <input class="form-control text-uppercase" type="text" name="plgName" id="plgName" list="priselistgroupSelect" placeholder="выбери группу или добавь новую">
-            <datalist id="priselistgroupSelect" >
-              <?php
-              echo $pricelist->pricelistgroupOptionList();
-              ?>
-            </datalist>
+            <datalist id="priselistgroupSelect" ></datalist>
          <input class="form-control text-lowercase" type="text" name="plName" id="plName" placeholder="имя позиции">
          <input class="form-control" type="number" name="plPrice" id="plPrice" placeholder="цена">
-         <button class="btn btn-primary btn-block" onclick="btnClick()" type="submit" name="AddSubmit" value="TRUE">добавить</button>
+         <button class="btn btn-primary btn-block" type="submit" id="addSubmit" name="addSubmit">добавить</button>
          
          
-       </form-->  
-         
-
-     
-
+       </form>
+       
+      <!--button class="btn btn-primary btn-block" onclick="pricelistAdd()" id="addSubmit" name="addSubmit">добавить</button-->
+    </div>      
     </div> <!-- /container -->
-
+    
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="js/test-ajax-pricelist.js"></script>

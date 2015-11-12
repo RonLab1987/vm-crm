@@ -55,7 +55,7 @@
          <input class="form-control text-uppercase" type="text" name="plgName" id="plgName" list="priselistgroupSelect" placeholder="выбери группу или добавь новую">
             <datalist id="priselistgroupSelect" >
               <?php
-              echo $pricelist->pricelistgroupOptionList();
+              echo $pricelist->pricelistGroupOptionList();
               ?>
             </datalist>
          <input class="form-control text-lowercase" type="text" name="plName" id="plName" placeholder="имя позиции">
