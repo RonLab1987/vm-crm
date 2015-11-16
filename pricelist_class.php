@@ -4,13 +4,17 @@
 
 class pricelist{
 	
-	//PRICELIST_HTML_TABLE()
-	//выводит html таблицу pricelist, со стилями $tableClass, $headGroupClass
+	/*	PRICELIST_HTML_TABLE()
+	 *	выводит html таблицу pricelist, со стилями $tableClass, $headGroupClass
+	 *
+	 *
+	 */
 	function pricelistTable($tableClass, $headGroupClass){
-	// запрос
+	
 	$database = new database;
 	$UserAccess = "quest";
-	$QueryText = "SELECT  `pl_id` ,  `plg_id` ,  `plg_name` ,  `pl_name` ,  `pl_price` FROM  `pricelist` INNER JOIN  `pricelistgroup` ON  `pl_plg_id` =  `plg_id` ORDER BY  `plg_id` ASC ";
+	$QueryText = "SELECT  `pl_id` ,  `plg_id` ,  `plg_name` ,  `pl_name` ,  `pl_price` FROM  `pricelist` 
+						INNER JOIN  `pricelistgroup` ON  `pl_plg_id` =  `plg_id` ORDER BY  `plg_id` ASC ";
 	$plQuery = $database->query_with_access ($QueryText , $UserAccess);
 	
 	// установка индикатора группы
@@ -60,7 +64,7 @@ class pricelist{
 
 
 	
-	//pricelistgroupCheckListHTML
+	//pricelistGroupOptionList()
 	// выводит список групп для выбора при добавлении новой позиции в pricelist
 	function pricelistGroupOptionList(){
 	$UserAccess = "quest";
@@ -148,9 +152,45 @@ class pricelist{
 	
 	
 	/*
-	*
-	*
-	*/
+	 *
+	 *
+	 */
+	function plgJSON(){
+	$UserAccess = "quest";
+	//$QueryText = "SELECT `plg_id`, `plg_name` FROM `pricelistgroup`";
+	$QueryText = "SELECT   `plg_name` AS  \"name\" FROM  `pricelistgroup`";
+	 
+	$database = new database;
+	$query = $database->query_with_access ($QueryText , $UserAccess);
+	$checkList = FALSE;
+	
+	if($query){
+		//echo "<p>всего строк : " . $query->num_rows . "</p>"; 
+		$qResult = $query->fetch_all();
+		$checkList = json_encode($qResult);
+	
+	}
+	return $checkList;	
+	}
+	
+	/*	
+	 *
+	 *
+	 */
+	function plJSON(){
+	
+	$database = new database;
+	$UserAccess = "quest";
+	$QueryText = "SELECT  `pl_id` ,  `plg_id` ,  `plg_name` ,  `pl_name` ,  `pl_price` FROM  `pricelist` 
+						INNER JOIN  `pricelistgroup` ON  `pl_plg_id` =  `plg_id` ORDER BY  `plg_id` ASC ";
+	$plQuery = $database->query_with_access ($QueryText , $UserAccess);
+	
+	//echo "<p>всего строк : " . $plQuery->num_rows . "</p>"; 
+	$plQueryResult = $plQuery->fetch_all();
+	
+			
+	return json_encode($plQueryResult);
+	}
 	
 }
 

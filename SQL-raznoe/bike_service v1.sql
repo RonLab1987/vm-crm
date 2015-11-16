@@ -1,0 +1,180 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Хост: 127.0.0.1
+-- Время создания: Ноя 16 2015 г., 15:54
+-- Версия сервера: 5.5.25
+-- Версия PHP: 5.3.13
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- База данных: `bike_service`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `client`
+--
+
+CREATE TABLE IF NOT EXISTS `client` (
+  `cl_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cl_name` varchar(15) NOT NULL,
+  `cl_surname` varchar(15) NOT NULL,
+  `cl_patronymic` varchar(15) NOT NULL,
+  `cl_phone1` varchar(11) NOT NULL,
+  `cl_phone2` varchar(11) NOT NULL,
+  `cl_mail` text NOT NULL,
+  `cl_other_contact` text NOT NULL,
+  `cl_note` text NOT NULL,
+  `cl_status_id` int(11) NOT NULL,
+  PRIMARY KEY (`cl_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- Дамп данных таблицы `client`
+--
+
+INSERT INTO `client` (`cl_id`, `cl_name`, `cl_surname`, `cl_patronymic`, `cl_phone1`, `cl_phone2`, `cl_mail`, `cl_other_contact`, `cl_note`, `cl_status_id`) VALUES
+(1, 'Денис', 'Жолобов', '', '0', '0', '', 'http://vk.com/l6jl9l', '', 0),
+(7, 'Pasha', 'Mamaev', '', '89058721942', '', '', '', '', 0),
+(8, 'testUser', 'nuberOne', '', '89120000001', '', '', '', '', 0),
+(9, 'testUser', 'nuberTwo', '', '89120000002', '', '', '', '', 0),
+(10, 'testUser', 'nuberThree', '', '89120000003', '', '', '', '', 0),
+(11, 'testUser', 'nuberFour', '', '89120000004', '', '', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `mechanic`
+--
+
+CREATE TABLE IF NOT EXISTS `mechanic` (
+  `mech_id` int(11) NOT NULL AUTO_INCREMENT,
+  `mech_name` varchar(30) NOT NULL,
+  `mech_status` int(11) NOT NULL,
+  `mech_acc_id` int(11) NOT NULL,
+  `mech_login` text NOT NULL,
+  `mech_password` text NOT NULL,
+  PRIMARY KEY (`mech_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Дамп данных таблицы `mechanic`
+--
+
+INSERT INTO `mechanic` (`mech_id`, `mech_name`, `mech_status`, `mech_acc_id`, `mech_login`, `mech_password`) VALUES
+(1, 'Роман', 0, 0, 'RonLab', 'GSyngach'),
+(2, 'Лёха Маракулин', 0, 0, 'benjke', 'benjke');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `order`
+--
+
+CREATE TABLE IF NOT EXISTS `order` (
+  `ord_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ord_cl_id` int(11) NOT NULL,
+  `ord_bike` text NOT NULL,
+  `ord_job_price` int(11) NOT NULL,
+  `ord_job_discount` int(11) NOT NULL,
+  `ord_part_price` int(11) NOT NULL,
+  `ord_part_margin` int(11) NOT NULL,
+  `ord_part_discount` int(11) NOT NULL,
+  `ord_start_job` date NOT NULL,
+  `ord_finish_job` int(11) NOT NULL,
+  `ord_mech_id` int(11) NOT NULL,
+  `ord_client_note` text NOT NULL,
+  `ord_internal_note` text NOT NULL,
+  PRIMARY KEY (`ord_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `orderjoblist`
+--
+
+CREATE TABLE IF NOT EXISTS `orderjoblist` (
+  `ojl_ord_id` int(11) NOT NULL,
+  `ojl_pl_id` int(11) NOT NULL,
+  `ojl_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pricelist`
+--
+
+CREATE TABLE IF NOT EXISTS `pricelist` (
+  `pl_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pl_plg_id` int(11) NOT NULL,
+  `pl_name` mediumtext,
+  `pl_price` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pl_id`),
+  KEY `pl_plg_id` (`pl_plg_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Дамп данных таблицы `pricelist`
+--
+
+INSERT INTO `pricelist` (`pl_id`, `pl_plg_id`, `pl_name`, `pl_price`) VALUES
+(1, 2, 'test', 300),
+(2, 2, 'test', 300),
+(3, 2, 'test 3', 300),
+(4, 3, 'test 3', 300),
+(5, 3, 'test 3', 300),
+(6, 3, 'test', 350),
+(7, 3, 'qwe', 123),
+(8, 4, 'new', 200);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pricelistgroup`
+--
+
+CREATE TABLE IF NOT EXISTS `pricelistgroup` (
+  `plg_id` int(11) NOT NULL AUTO_INCREMENT,
+  `plg_name` char(50) DEFAULT NULL,
+  `plg_show_id` int(11) DEFAULT '0',
+  PRIMARY KEY (`plg_id`),
+  UNIQUE KEY `plg_name` (`plg_name`),
+  KEY `plg_name_2` (`plg_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Дамп данных таблицы `pricelistgroup`
+--
+
+INSERT INTO `pricelistgroup` (`plg_id`, `plg_name`, `plg_show_id`) VALUES
+(1, '', 0),
+(2, 'test', 0),
+(3, 'новая Группа: вася жги!!!', 0),
+(4, 'Test group 4', 0);
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `pricelist`
+--
+ALTER TABLE `pricelist`
+  ADD CONSTRAINT `pricelist_ibfk_1` FOREIGN KEY (`pl_plg_id`) REFERENCES `pricelistgroup` (`plg_id`) ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
