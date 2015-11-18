@@ -15,29 +15,19 @@ function reNew(){
 }
 
 function pricelistTable(){
-	$('#pricelistTable').load("test-ajax-pricelist.php");
+	$('#pricelistTable').load("php/test-ajax-pricelist.php");
 }
 
 function pricelistAdd(){
-	$.ajaxSetup({
-  		async: false
-	});
-		var action = $(pricelistFormAdd).attr("action"); 
+	
+	var action = $(pricelistFormAdd).attr("action"); 
 	var post = $(pricelistFormAdd).serializeArray(); 
-	var result = $.post(action, post);
-	
-	$.ajaxSetup({
-		async: true
-	});
-	result.complete(reNew());
-	//clearTimeout (5000);
-	
-	//pricelistTable();
+	var result = $.post(action, post,function (){reNew()});
 	
 }
 
 function pricelistGroupList(){
 	
-	$('#priselistgroupSelect').load("test-ajax-pricelistGroupList.php");
+	$('#priselistgroupSelect').load("php/test-ajax-pricelistGroupList.php");
 	
 }

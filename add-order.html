@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>КАТАЙ - ОЧЕРЕДЬ</title>
+        <title>КАТАЙ - добавить заказ</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -22,51 +22,37 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <nav class="navbar navbar-inverse" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Веломастерская.Катай</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="">очередь</a> </li>
-                <li><a href="">клиенты</a> </li>
-                <li><a href="" >заказы</a> </li>
-                <li><a href="">прайс-лист</a> </li>
-                <li><a href="">статистика</a> </li>
-            </ul>
-            <button class="btn btn-success navbar-btn navbar-right">НОВЫЙ ЗАКАЗ</button>
-       
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
+         <div id='nav_div'></div>
+   
     
     <div class="container">
         <div class="col-md-12" id="clientDataDiv">
             <p class="lead"> Новый заказ </p>
-            <form  id="clientDataForm">
+            
+                <div class="form-group">
+            <!-- <form  id="clientDataForm">  -->
                 <label for="cl_phone">Телефон</label>
-                <input class="form-control" type="text" id="cl_phone" name="cl_phone"/>
-                    <div id="cl_phone_status" class='text-info'></div>
+                <div class="input-group">    
+                    <input class="form-control" type="text" id="cl_phone" name="cl_phone">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="cityPhone"></button>
+                    </span>
+                </div>
+                <div id="cl_phone_status" class='text-info'></div>
+                    
                 <label for="cl_name">Имя</label>
-                <input class="form-control" type="text" id="cl_name" name="cl_name" placeholder="имя"/>
+                <input class="form-control text-capitalize" type="text" id="cl_name" name="cl_name" placeholder="имя"/>
                 <label for="ord_bike">Велосипед / деталь</label>
                 <input class="form-control" type="text" id="ord_bike" name="ord_bike" placeholder="велосипед или деталь"/>
                 <label for="ord_bike">Дата</label>
                 <input class="form-control" type="text" id="ord_date_start" name="ord_date_start" />
                 <label for="ord_internal_note">Примечания к заказу</label>
                 <textarea class="form-control" id="ord_internal_note" name="ord_internal_note" placeholder="Примечания к заказу"></textarea>
-                <p><button class="btn btn-block btn-primary">Добавить</button></p>
-                     
-               
-                
-            </form>
+                <p><button class="btn btn-block btn-primary" id="addOrder">Добавить</button></p>
+                </div>
+            <!-- </form> </div>-->
+            
+        
         </div>
          
             
