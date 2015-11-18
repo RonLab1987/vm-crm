@@ -63,6 +63,7 @@ class database{
 	if(!isset($GLOBALS['db_connect'])){
 		$database = new database;
 		$data = $database->db_connect();
+		//echo "go bd_connect";
 	};
 	
 	$query = $GLOBALS['db_connect']->query($Query);

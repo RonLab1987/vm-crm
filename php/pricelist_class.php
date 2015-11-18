@@ -1,4 +1,4 @@
-<?php include_once 'database.php'; ?>
+<?php include_once 'database_class.php'; ?>
 
 <?php
 
@@ -173,6 +173,26 @@ class pricelist{
 	return $checkList;	
 	}
 	
+	function modPlgJSON(){
+	$UserAccess = "quest";
+	//$QueryText = "SELECT `plg_id`, `plg_name` FROM `pricelistgroup`";
+	$QueryText = "SELECT   `plg_name` AS  \"name\" FROM  `pricelistgroup`";
+	 
+	$database = new database;
+	$query = $database->query_with_access ($QueryText , $UserAccess);
+	$checkList = array();
+	
+	if($query){
+		//echo "<p>всего строк : " . $query->num_rows . "</p>"; 
+		while($qRow = $query->fetch_assoc()){
+			$checkList[] = $qRow;
+		}
+	$res = json_encode($checkList);	
+	
+	}
+	return $res;	
+	}
+	
 	/*	
 	 *
 	 *
@@ -186,10 +206,19 @@ class pricelist{
 	$plQuery = $database->query_with_access ($QueryText , $UserAccess);
 	
 	//echo "<p>всего строк : " . $plQuery->num_rows . "</p>"; 
-	$plQueryResult = $plQuery->fetch_all();
+	//$plQueryResult = $plQuery->fetch_all();
+	
+	$checkList = array();
+	
+	if($plQuery){
+		while($qRow = $plQuery->fetch_assoc()){
+			$checkList[] = $qRow;
+		}
+	}
+	//$res = json_encode($checkList);	
 	
 			
-	return json_encode($plQueryResult);
+	return json_encode($checkList);
 	}
 	
 }
