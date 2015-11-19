@@ -4,7 +4,9 @@
 
 $('document').ready(dockReady); // DOM FUNCTION
 $("#cityPhone").click(setPhoneMask); // DOM FUNCTION
-$("#addOrder").click(addOrder); // AJAX FUNCTION
+//$( "#addOrderForm" ).submit(function( event ) { addOrder();  event.preventDefault();}); // AJAX FUNCTION
+$( "#addOrderForm" ).submit(addOrder); // AJAX FUNCTION
+//$("#cl_phone").change(addOrderHide);
 
 // END ОБРАБОТЧИКИ СОБЫТИЙ | END ОБРАБОТЧИКИ СОБЫТИЙ | END ОБРАБОТЧИКИ СОБЫТИЙ |
  
@@ -22,9 +24,10 @@ $("#addOrder").click(addOrder); // AJAX FUNCTION
  */
 
 function dockReady(){
+    addOrderHide();
     $('#nav_div').load ("./nav.html");
-    $('#cl_phone_status').html('введи номер телефона');
-    $("#cityPhone").click();                
+    setPhoneMask();
+                   
     $('#ord_date_start').inputmask("dd.mm.yyyy",{"placeholder": "дд.мм.гггг"} );
     var date = new Date();
     $('#ord_date_start').val(date.toLocaleDateString());
@@ -38,22 +41,28 @@ function dockReady(){
  */
  
 function setPhoneMask(){
+    addOrderHide();
+    $('#cl_phone_status').html('введи номер телефона');
     $('#cl_phone').val("");
     $('#cl_name').val("");
+    
     
     if($("#cityPhone").html() == 'сотовый номер' || $("#cityPhone").html() == '' ){
       var mask ="+7(999)999-99-99";
       var btn = "городской / прямой";
+      var plh = "сотовый телефон"
     }
     else{
       var mask ="+7(833)299-99-99";
       var btn = "сотовый номер";
+      var plh = "городской / прямой телефон"
     }
     
     $('#cl_phone').inputmask(mask, {
                         "oncomplete": function(){$('#cl_phone_status').html('ищу клиента'); existClient();}, // AJAX  FUNCTION
-                        "onincomplete": function(){$('#cl_phone_status').html('введи номер телефона');  $('#cl_name').val("");},
-                        "oncleared": function(){$('#cl_phone_status').html('введи номер телефона');  $('#cl_name').val("");}} );
+                        "onincomplete": function(){$('#cl_phone_status').html('введи номер телефона');  $('#cl_name').val(""); addOrderHide();}, // DOM FUNCTION
+                        "oncleared": function(){$('#cl_phone_status').html('введи номер телефона');  $('#cl_name').val(""); addOrderHide();} }); // DOM FUNCTION
+    cl_phone.placeholder = plh;
     $("#cityPhone").html(btn);
     
 } 
@@ -70,11 +79,62 @@ function ifExistClient(json){
         console.log (json['cl_name']);
         $('#cl_name').val(json['cl_name']);
         $('#cl_phone_status').html('отлично, это наш старый знакомый(ая) ');
+        $('#cl_id').val(json['cl_id']);
     }
     else{
         $('#cl_phone_status').html(' это новый клиент, постарайся чтобы он вернулся ;) ');
-        $('#cl_name').val("");
+        $('#cl_name').val('');
+        $('#cl_id').val('-1');
     }
+    addOrderShow();
+}
+
+
+/*
+ * dockClear()
+ * очищаем значения input
+ *
+ */
+
+function dockClear(){
+    //addOrderHide();
+    $('#cl_id').val('-1');
+    $('#ord_internal_note').val('');     
+    $('#ord_bike').val('');
+   
+    $("#cityPhone").html('');
+    
+    setPhoneMask();
+    
+                
+    $('#ord_date_start').val('');
+    var date = new Date();
+    $('#ord_date_start').val(date.toLocaleDateString());
+}
+
+    
+/*
+ * addOrderHide()
+ * скрывает группу input элеметов формы
+ *
+ */
+
+function addOrderHide(){
+    if (!$('#addOrderGroup').hasClass('invisible')){
+        $('#addOrderGroup').toggleClass('invisible');
+    }    
+}
+
+/*
+ * addOrderShow()
+ * скрывает группу input элеметов формы
+ *
+ */
+
+function addOrderShow(){
+    if ($('#addOrderGroup').hasClass('invisible')){
+        $('#addOrderGroup').toggleClass('invisible');
+    }    
 }
 
 // END DOM FUNCTION | END DOM FUNCTION | END DOM FUNCTION | END DOM FUNCTION |
@@ -114,8 +174,19 @@ function existClient(){
  *
  */
 function addOrder(){
+    
     console.clear();
     console.log ('add order');
+    var dataOrder = $("#addOrderForm").serializeArray();
+    console.dir (dataOrder);
+    
+    $.ajax({
+        method: "POST",
+        dataType: "json",
+        url: "php/addOrderJSON.php",
+        data: dataOrder,
+        success: function(json){ console.log(json); dockClear();}
+    });
 }
 
 // END AJAX  FUNCTION | END AJAX  FUNCTION | END AJAX  FUNCTION |  END AJAX  FUNCTION |

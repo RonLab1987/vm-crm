@@ -29,29 +29,31 @@
         <div class="col-md-12" id="clientDataDiv">
             <p class="lead"> Новый заказ </p>
             
-                <div class="form-group">
-            <!-- <form  id="clientDataForm">  -->
+             <!--form class="form" id="addOrderForm"-->
+             <form class="form" id="addOrderForm" action="index.html">    
+               <div class="form-group" id="clPhoneGroup">
                 <label for="cl_phone">Телефон</label>
                 <div class="input-group">    
-                    <input class="form-control" type="text" id="cl_phone" name="cl_phone">
+                    <input class="form-control" type="text" id="cl_phone" name="cl_phone" >
                     <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="cityPhone"></button>
                     </span>
                 </div>
-                <div id="cl_phone_status" class='text-info'></div>
-                    
+                <span id="cl_phone_status" class='text-info'></span>
+               </div>
+               <div class="form-grtoup invisible" id="addOrderGroup"> 
                 <label for="cl_name">Имя</label>
                 <input class="form-control text-capitalize" type="text" id="cl_name" name="cl_name" placeholder="имя"/>
+                <input class="form-control" type="hidden" id="cl_id" name="cl_id" placeholder="cl_id" value='-1'/>
                 <label for="ord_bike">Велосипед / деталь</label>
                 <input class="form-control" type="text" id="ord_bike" name="ord_bike" placeholder="велосипед или деталь"/>
                 <label for="ord_bike">Дата</label>
                 <input class="form-control" type="text" id="ord_date_start" name="ord_date_start" />
                 <label for="ord_internal_note">Примечания к заказу</label>
                 <textarea class="form-control" id="ord_internal_note" name="ord_internal_note" placeholder="Примечания к заказу"></textarea>
-                <p><button class="btn btn-block btn-primary" id="addOrder">Добавить</button></p>
-                </div>
-            <!-- </form> </div>-->
-            
+                <p><button class="btn btn-block btn-primary" type="submit" id="addOrder">Добавить</button></p>
+               </div>
+            </form> 
         
         </div>
          
