@@ -14,8 +14,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
        
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/main.css">
-
+        
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
@@ -23,111 +22,22 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
        <div id='nav_div'></div>
-       
+    
     <div class="container">
-        <div class="col-sm-12 col-md-12" id="inJobDiv">
-            <table class="table table-hover table-responsive" id="inJobTable">
-                <thead>
-                <span class="text-primary "> В РАБОТЕ </span>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>№</th>
-                        <th>дней</th>
-                        <th>велосипед/деталь</th>
-                        <th>хозяин</th>
-                        <th>телефон</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>65</td>
-                        <td class="bg-danger ">5</td>
-                        <td>стартон</td>
-                        <td>Иван</td>
-                        <td>8(922)337-57-88</td>
-                        <td class="bg-info text-center"><a>инфо</a></td>
-                        <td class="bg-success text-center"><a>готово</a> </td>
-                    </tr>
-                    <tr>
-                        <td>66</td>
-                        <td>2</td>
-                        <td>вилка Marzochi Marafon LR</td>
-                        <td>Костя </td>
-                        <td>34-45-96</td>
-                        <td class="bg-info text-center"><a>инфо</a></td>
-                        <td class="bg-success text-center"><a>готово</a> </td>
-                    </tr>
-                    <tr>
-                        <td>67</td>
-                        <td>1</td>
-                        <td>GIANT Anthem</td>
-                        <td>Роман </td>
-                        <td>8(912)337-07-70</td>
-                        <td class="bg-info text-center"><a>инфо</a></td>
-                        <td class="bg-success text-center"><a>готово</a> </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="container" id="readyJobDiv">
-            <table class=" table table-hover" id="readyJobTable">
-                <thead>
-                <span class="text-success "> ГОТОВЫ: ожидают </span>
-                </thead>
-                <tbody>
-                <tr>
-                    <th>№</th>
-                    <th>дней</th>
-                    <th>велосипед/деталь</th>
-                    <th>хозяин</th>
-                    <th>телефон</th>
-                    <th>к оплате</th>
-                    <th>статус</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>64</td>
-                    <td>1</td>
-                    <td>GIANT Rincon</td>
-                    <td>Игорь </td>
-                    <td>8(912)337-87-70</td>
-                    <td>500</td>
-                    <td>позвонили , оплачен <a>изменить</a></td>
-                    <td class="bg-info text-center"><a>инфо</a></td>
-                </tr>
-                <tr>
-                    <td>63</td>
-                    <td>1</td>
-                    <td>GT avalanche</td>
-                    <td>Юра </td>
-                    <td>8(912)451-87-70</td>
-                    <td>1350</td>
-                    <td>не звонили , не оплачен <a>изменить</a></td>
-                    <td class="bg-info text-center"><a>инфо</a></td>
-                </tr>
-                <tr>
-                    <td>62</td>
-                    <td>3</td>
-                    <td>GT avalanche</td>
-                    <td>Валера </td>
-                    <td>8(912)451-87-70</td>
-                    <td>1900</td>
-                    <td>не абонент , оплачен <a>изменить</a></td>
-                    <td class="bg-info text-center"><a>инфо</a></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-            
+       
+       <div id="orderTable">
+           <table class="table" id="testTable">
+               
+           </table>
+           
+       </div>  
+        
+        
     </div>
     
-    
 
-      <footer>
-        <p>&copy; КАТАЙ 2015</p>
-      </footer>
-    </div> <!-- /container -->  
+   
+    
     
    
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
@@ -135,10 +45,7 @@
 
         <script src="js/vendor/bootstrap.min.js"></script>
         
-        <script> $('document').ready(function(){$('#nav_div').load ("nav.html");}); </script>
-    
-
-        <script src="js/main.js"></script>
+       <script src="js/index.js"></script>
 
        
     </body>

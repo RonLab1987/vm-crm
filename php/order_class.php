@@ -38,6 +38,35 @@ class order{
 
 
 
+	/* 
+	* функция showOrders() выводит
+	* таблицу заказов, включая в неё-же данные
+	* о клиенте и статусе заказа
+	*
+	*/
+	function showOrders(){
+		$result = array();
+		$query = "SELECT  `ord_id` ,  `ord_start_job` ,  `ord_bike` ,  `cl_name` ,  `cl_phone1` , 
+						  `os_status` ,  `called` ,  `paid` ,  `taken` ,  `os_show_id` 
+						FROM  `orderstatuslist` ,  `order` ,  `client` ,  `orderstatus` 
+						WHERE  `osl_ord_id` =  `ord_id` 
+						AND  `ord_cl_id` =  `cl_id` 
+						AND  `osl_os_id` =  `os_id` 
+						ORDER BY  `os_show_id` ASC ,  `ord_start_job` ASC" ;
+				
+		$database = new database;
+		$qResult = $database->dbQuery($query);
+				
+		if($qResult){		
+			while($qRow = $qResult->fetch_assoc()){
+				$result[] = $qRow;
+				}	
+		}
+		
+		return  $result;	
+	}
+	
+
 
 }
 

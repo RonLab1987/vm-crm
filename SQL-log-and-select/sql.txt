@@ -6,6 +6,28 @@ ORDER BY  'plg_id'
 
 //------------
 
+SELECT `ord_id`,`ord_start_job`,`ord_bike`, `cl_name`, `cl_phone1`
+	FROM `order`
+        INNER JOIN `client`
+        WHERE `ord_cl_id` = `cl_id`
+        ORDER BY `ord_start_job` DESC      
+
+//--------------
+SELECT `ord_id`,`ord_start_job`,`ord_bike`, `cl_name`, `cl_phone1`, `os_status`, `called`, `paid`,`taken`
+	FROM `orderstatuslist`, `order`, `client`, `orderstatus`
+        WHERE `osl_ord_id`=`ord_id` AND `ord_cl_id` = `cl_id` AND `osl_os_id`=`os_id`;       
+
+//------
+!!! тема )
+SELECT  `ord_id` ,  `ord_start_job` ,  `ord_bike` ,  `cl_name` ,  `cl_phone1` ,  `os_status` ,  `called` ,  `paid` ,  `taken` ,  `os_show_id` 
+FROM  `orderstatuslist` ,  `order` ,  `client` ,  `orderstatus` 
+WHERE  `osl_ord_id` =  `ord_id` 
+AND  `ord_cl_id` =  `cl_id` 
+AND  `osl_os_id` =  `os_id` 
+ORDER BY  `os_show_id` ASC ,  `ord_start_job` DESC ;
+
+//---
+
 
 CREATE TABLE `pricelistgroup` (
 	`plg_id` INTEGER NOT NULL AUTO_INCREMENT,

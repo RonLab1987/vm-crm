@@ -165,9 +165,6 @@ function existClient(){
 // end existClient()
 
 
-
-
-
 /*
  * addOrder()
  * добавляем заказ
