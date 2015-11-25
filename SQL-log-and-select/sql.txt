@@ -1,4 +1,10 @@
 
+CREATE TRIGGER `onNewOrder` AFTER INSERT ON `order` 
+FOR EACH ROW 
+INSERT INTO `orderstatuslist`(`osl_ord_id`) VALUES ( NEW.ord_id ); 
+
+
+// ---------------
 SELECT  `pl_id` ,  `plg_id` ,  `plg_name` ,  `pl_name` ,  `pl_price` 
 FROM  `pricelist` 
 INNER JOIN  `pricelistgroup` ON  `pl_plg_id` =  `plg_id` 
