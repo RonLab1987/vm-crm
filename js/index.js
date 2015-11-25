@@ -33,12 +33,12 @@ function showOrdersTables(json){
  */
 function showOrdersInJobTable(json){
     
-    var html="<tr><th>ID</th><th>поступил</th><th>велосипед / деталь </th><th>клиент</th><th>телефон</th></tr>";
+    var html="<tr><th>ID</th><th>поступил</th><th>велосипед / деталь </th><th>клиент</th><th>телефон</th><th></th></tr>";
        
     for(var i=0; i<json.length; i++){
      html += "<tr><td>"+json[i]['ord_id']+"</td><td>"+json[i]['ord_start_job']+
              "</td><td>"+json[i]['ord_bike']+"</td><td>"+json[i]['cl_name']+
-             "</td><td>"+json[i]['cl_phone1']+"</td></tr>";   
+             "</td><td>"+json[i]['cl_phone1']+"</td><td><a href='edit-order.php?ord_id="+json[i]['ord_id']+"'>редактировать</a></td></tr>";   
     }
     $('#inJobTable').html(html);
 }

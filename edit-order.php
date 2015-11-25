@@ -28,7 +28,7 @@
     
     
     <div class="container">
-        <h3> Заказ №: <span id="ordIdSpan"> <?php echo $_GET['ord_id'] ?> </span> </h3>
+        <h3> ID заказа: <span id="ordIdSpan"> <?php echo $_GET['ord_id'] ?> </span> </h3>
         <div id="mainInfo">
             <form id='mainInfoForm'>
                 <label for="ordBike">велосипед / запчасть</label>

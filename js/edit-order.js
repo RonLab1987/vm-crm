@@ -1,6 +1,6 @@
 // ОБРАБОТЧИКИ СОБЫТИЙ * ОБРАБОТЧИКИ СОБЫТИЙ * ОБРАБОТЧИКИ СОБЫТИЙ * ОБРАБОТЧИКИ СОБЫТИЙ *
 
-$('document').ready(function(){ $('#nav_div').load ("nav.html"); });
+$('document').ready(function(){showOrderById(); $('#nav_div').load ("nav.html"); });
 
 // END ОБРАБОТЧИКИ СОБЫТИЙ | END ОБРАБОТЧИКИ СОБЫТИЙ | END ОБРАБОТЧИКИ СОБЫТИЙ |
 
