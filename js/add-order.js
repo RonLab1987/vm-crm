@@ -182,7 +182,7 @@ function addOrder(){
         dataType: "json",
         url: "php/addOrderJSON.php",
         data: dataOrder,
-        success: function(json){ console.log(json); dockClear();}
+        success: function(json){dockClear(); console.log(json); }
     });
 }
 

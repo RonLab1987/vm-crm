@@ -67,8 +67,8 @@ class order{
 	}
 	
 	/* 
-	* функция showOrdersInJob() выводит
-	* таблицу заказов со статусом "В РАБОТЕ", включая в неё-же данные
+	* функция showOrdersByStatus($status) выводит
+	* таблицу заказов со статусом $status, включая в неё-же данные
 	* о клиенте 
 	*
 	*/
@@ -93,6 +93,59 @@ class order{
 		
 		return  $result;	
 	}
+	
+	/* 
+	* функция showOrdersInJob() выводит
+	* таблицу заказов со статусом "В РАБОТЕ", включая в неё-же данные
+	* о клиенте 
+	*
+	
+	function showOrdersByStatus($status){
+		$result = array();
+		$query = "SELECT  `ord_id` ,  `ord_start_job` , `ord_finish_job` ,  `ord_bike` ,  `cl_name` ,  `cl_phone1`, 
+						  `called` ,  `paid` ,  `taken`  
+					FROM  `orderstatuslist` ,  `order` ,  `client` 
+					WHERE  `osl_ord_id` =  `ord_id` 
+					AND  `ord_cl_id` =  `cl_id` 
+					AND  `osl_os_id` = $status
+					ORDER BY  `ord_start_job` ASC " ;
+				
+		$database = new database;
+		$qResult = $database->dbQuery($query);
+				
+		if($qResult){		
+			while($qRow = $qResult->fetch_assoc()){
+				$result[] = $qRow;
+				}	
+		}
+		
+		return  $result;	
+	}*/
+
+	/* 
+	* функция showOrderById() выводит
+	* заказ по ID, включая данные
+	* о клиенте и механике
+	*
+	*/
+	function showOrderById(){
+		$ordId = $_POST['ordId'];
+		$query = "SELECT `cl_name`,`cl_phone1`, `ord_bike`, `ord_start_job`, `ord_finish_job`, `ord_client_note`, `ord_internal_note`, `mech_name`
+					FROM `order`, `client`, `mechanic`
+					WHERE `ord_cl_id` = `cl_id`
+					AND `ord_mech_id` = `mech_id`
+					AND `ord_id` = ". $ordId ;
+				
+		$database = new database;
+		$qResult = $database->dbQuery($query);
+			
+		if($qResult){
+			$result = $qResult->fetch_assoc();
+		}		
+		
+		return  $result;	
+	}	
+	
 	
 
 
